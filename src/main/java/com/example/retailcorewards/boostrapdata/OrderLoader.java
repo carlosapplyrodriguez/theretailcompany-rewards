@@ -12,6 +12,12 @@ import java.time.LocalDate;
 @Component
 public class OrderLoader implements CommandLineRunner {
 
+    private OrderRepository orderRepository;
+
+    public OrderLoader(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     private CustomerDto ramza = CustomerDto.builder()
             .id("ramlve")
             .firstName("Ramza")
@@ -39,12 +45,6 @@ public class OrderLoader implements CommandLineRunner {
             .lastName("Oaks")
             .email("agrias.oaks@fftexample.com\n")
             .build();
-
-    private OrderRepository orderRepository;
-
-    public OrderLoader(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
 
     @Override
     public void run(String... args) throws Exception {
