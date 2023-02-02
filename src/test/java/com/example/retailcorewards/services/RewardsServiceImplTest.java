@@ -59,6 +59,7 @@ class RewardsServiceImplTest {
 
     private static Object[] testUpperThresholdNumberValues() {
         return new Object[] {
+                new Object[] { 90, 50, 100, 2, 40 },
                 new Object[] { 100, 50, 100, 2, 50 },
                 new Object[] { 110, 50, 100, 2, 70 },
                 new Object[] { 150, 50, 100, 2, 150 },
@@ -109,7 +110,7 @@ class RewardsServiceImplTest {
                     add(OrderDto.builder()
                         .id("order1")
                         .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
-                        .creationDate(LocalDate.parse("2022-12-03"))
+                        .creationDate(localDate1)
                         .total(new BigDecimal("70"))
                         .customer(ramza)
                         .build()
@@ -169,6 +170,7 @@ class RewardsServiceImplTest {
                         .build()
                     );
 
+
                     // Delita Orders
 
                     add(OrderDto.builder()
@@ -210,7 +212,7 @@ class RewardsServiceImplTest {
                     add(OrderDto.builder()
                             .id("order13")
                             .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
-                            .creationDate(localDate3)
+                            .creationDate(localDate2)
                             .total(new BigDecimal("320"))
                             .customer(delita)
                             .build()
@@ -219,14 +221,14 @@ class RewardsServiceImplTest {
 
                 new HashMap<String, Map<String, Integer>>() {{
                     put("Delita Heiral", new HashMap<String, Integer>(){{
-                        put("DECEMBER", 142);
-                        put("NOVEMBER", 1400);
-                        put("OCTOBER", 257);
+                        put("DECEMBER", 292);
+                        put("NOVEMBER", 3340);
+                        put("OCTOBER", 37);
                     }});
                     put("Ramza Beoulve", new HashMap<String, Integer>(){{
                         put("DECEMBER", 35);
-                        put("NOVEMBER", 30);
-                        put("OCTOBER", 105);
+                        put("NOVEMBER", 80);
+                        put("OCTOBER", 255);
                     }});
                 }}
             }
