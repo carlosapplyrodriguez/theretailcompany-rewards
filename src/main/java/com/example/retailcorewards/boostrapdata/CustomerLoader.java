@@ -10,10 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerLoader implements CommandLineRunner {
 
-    @Autowired
     private final CustomerRepository customerRepository;
-
-    @Autowired
     private final OrderRepository orderRepository;
 
     public CustomerLoader(OrderRepository orderRepository, CustomerRepository customerRepository) {
