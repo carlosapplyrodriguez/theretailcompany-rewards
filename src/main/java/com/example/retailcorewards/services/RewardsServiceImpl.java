@@ -7,28 +7,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A service to calculate reward points through processing of orders.
+ */
 @Service
 public class RewardsServiceImpl implements RewardsService {
 
-    private int lowerRewardsThreshold = 50;
-
-    private int upperRewardsThreshold = 100;
-
-    private int rewardPointsForLowerThreshold = 1;
-
-    private int rewardPointsForUpperThreshold = 2;
-
-    int orderTotal;
-    String customerFullName;
-    String monthOfOrder;
+    private static final int lowerRewardsThreshold = 50;
+    private static final int upperRewardsThreshold = 100;
+    private static final int rewardPointsForLowerThreshold = 1;
+    private static final int rewardPointsForUpperThreshold = 2;
 
 
+    /**
+     * A method to process a list of OrderDto objects to summarize the total of reward points a customer accrued by month based in purchase amounts.
+     *
+     * @param orders  A list of OrderDto objects used to calculate reward points.
+     * @return A map where the key is the customer name, and where the value is a map where the key is a month and they value is the points for that month.
+     * @throws Exception Exception is thrown when the rewards thresholds have negative values.
+     */
     @Override
     public Map<String, Map<String, Integer>> getRewardPoints(List<OrderDto> orders) throws Exception {
+
+        int orderTotal;
+        String customerFullName;
+        String monthOfOrder;
 
         if (lowerRewardsThreshold <= 0 || upperRewardsThreshold <= 0 || rewardPointsForLowerThreshold <= 0 || rewardPointsForUpperThreshold <= 0) {
             throw new Exception("Invalid configuration value for rewards points calculation, negative values are not accepted.");
         }
+
         Map<String, Map<String, Integer>> result = new HashMap<>();
 
         if (null != orders && !orders.isEmpty()) {
@@ -47,8 +55,10 @@ public class RewardsServiceImpl implements RewardsService {
                             map.put(monthOfOrder, calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold));
                         }
                     } else {
-                        result.put(customerFullName, new HashMap<String, Integer>() {{
-                            put(monthOfOrder, calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold));
+                        String tempMonthOfOrder = monthOfOrder;
+                        int tempOrderTotal = orderTotal;
+                        result.put(customerFullName, new HashMap<>() {{
+                            put(tempMonthOfOrder, calculatePointsInLowerThreshold(tempOrderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold));
                         }});
                     }
                 } else if (orderTotal >= upperRewardsThreshold) {
@@ -56,13 +66,15 @@ public class RewardsServiceImpl implements RewardsService {
                         Map<String, Integer> map = result.get(customerFullName);
                         if (map.containsKey(monthOfOrder)) {
                             map.replace(monthOfOrder,
-                                    map.get(monthOfOrder) + calculatePointsInUpperThreshold(lowerRewardsThreshold, orderTotal, upperRewardsThreshold, rewardPointsForUpperThreshold));
+                                    map.get(monthOfOrder) + calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold));
                         } else {
-                            map.put(monthOfOrder, calculatePointsInUpperThreshold(lowerRewardsThreshold , orderTotal, upperRewardsThreshold, rewardPointsForUpperThreshold));
+                            map.put(monthOfOrder, calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold));
                         }
                     } else {
-                        result.put(customerFullName, new HashMap<String, Integer>() {{
-                            put(monthOfOrder, calculatePointsInUpperThreshold(lowerRewardsThreshold , orderTotal, upperRewardsThreshold, rewardPointsForUpperThreshold));
+                        String tempMonthOfOrder = monthOfOrder;
+                        int tempOrderTotal = orderTotal;
+                        result.put(customerFullName, new HashMap<>() {{
+                            put(tempMonthOfOrder, calculatePointsInUpperThreshold(tempOrderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold));
                         }});
                     }
                 }
@@ -71,8 +83,16 @@ public class RewardsServiceImpl implements RewardsService {
         return result;
     }
 
+    /**
+     * A method to calculate reward points when the purchase amount did pass the lower reward amount threshold, but not the upper threshold.
+     *
+     * @param orderTotal  The total amount spent in the order.
+     * @param lowerRewardsThreshold  The lower threshold configured to determine when a customer starts accruing reward points.
+     * @param rewardPointsForLowerThreshold  The amount of rewards points per dollar a customer can accrue when spending above the lower order threshold.
+     * @return An integer for the total points accrued in the lower threshold.
+     */
     public Integer calculatePointsInLowerThreshold(int orderTotal, int lowerRewardsThreshold, int rewardPointsForLowerThreshold) {
-        Integer result = 0;
+        int result = 0;
 
         if (orderTotal >= lowerRewardsThreshold) {
             result =  (orderTotal - lowerRewardsThreshold) * rewardPointsForLowerThreshold;
@@ -80,7 +100,23 @@ public class RewardsServiceImpl implements RewardsService {
         return result;
     }
 
+    /**
+     * A method to calculate reward points when the purchase amount surpassed the upper amount threshold.
+     *
+     * @param orderTotal: The total amount spent in the order.
+     * @param lowerRewardsThreshold  The lower threshold configured to determine when a customer starts accruing reward points.
+     * @param upperRewardsThreshold  The upper threshold configured to determine when a customer starts earning reward points.
+     * @param rewardPointsForUpperThreshold  The amount of rewards points per dollar a customer can accrue when spending above the upper order threshold.
+     * @return An integer for the total points accrued in the upper threshold.
+     */
     public Integer calculatePointsInUpperThreshold(int orderTotal, int lowerRewardsThreshold, int upperRewardsThreshold, int rewardPointsForUpperThreshold) {
-        return lowerRewardsThreshold + (orderTotal - upperRewardsThreshold) * rewardPointsForUpperThreshold;
+        int result = 0;
+
+        if (orderTotal >= upperRewardsThreshold) {
+            result = lowerRewardsThreshold + (orderTotal - upperRewardsThreshold) * rewardPointsForUpperThreshold;
+        } else if (orderTotal >= lowerRewardsThreshold && orderTotal <= upperRewardsThreshold) {
+            result =  (orderTotal - lowerRewardsThreshold) * rewardPointsForLowerThreshold;
+        }
+        return result;
     }
 }
