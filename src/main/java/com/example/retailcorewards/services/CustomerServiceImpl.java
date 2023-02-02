@@ -18,8 +18,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
+     * Method to return all persisted objects of type Customer.
      *
-     * @return
+     * @return A list of the persisted CustomerDto objects.
      */
     @Override
     public List<CustomerDto> getAllCustomers() {
@@ -27,8 +28,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
+     * Method to add a new Customer.
      *
-     * @param customer
+     * @param customer  Object representing the customer to add.
      */
     @Override
     public void addCustomer(CustomerDto customer) {
@@ -36,8 +38,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     /**
+     * Method to delete a specific Customer.
      *
-     * @param customer
+     * @param customer  Object representing the Customer to delete.
      */
     public void deleteCustomer(CustomerDto customer) {
         customerRepository.delete(customer);

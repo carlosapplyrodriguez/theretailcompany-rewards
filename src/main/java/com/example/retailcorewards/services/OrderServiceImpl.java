@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
+/**
+ * A service in charge of performing basic operations in Order objects.
+ *
+ * Supports: Getting all orders, adding an order (requires passing the order to add.), deleting an order (requires the order to delete).
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -20,8 +24,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * Method to return all persisted objects of type Order.
      *
-     * @return
+     * @return a list of the persisted OrderDto objects.
      */
     @Override
     public List<OrderDto> getAllOrders() {
@@ -29,8 +34,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * Method to add a new order
      *
-     * @param orderDto
+     * @param orderDto  Object representing the order to add.
      */
     @Override
     public void addOrder(OrderDto orderDto) {
@@ -38,8 +44,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
+     * Method to delete a specific order.
      *
-     * @param orderDto
+     * @param orderDto  Object representing the Order to delete.
      */
     @Override
     public void deleteOrder(OrderDto orderDto) {
