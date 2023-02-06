@@ -1,7 +1,6 @@
 package com.example.retailcorewards.web.controller;
 
 import com.example.retailcorewards.services.OrderService;
-import com.example.retailcorewards.web.model.CustomerDto;
 import com.example.retailcorewards.web.model.OrderDto;
 import org.springframework.web.bind.annotation.*;
 

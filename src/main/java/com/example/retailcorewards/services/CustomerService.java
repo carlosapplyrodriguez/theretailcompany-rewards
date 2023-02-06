@@ -5,7 +5,6 @@ import com.example.retailcorewards.web.model.CustomerDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface CustomerService {
@@ -15,5 +14,4 @@ public interface CustomerService {
     void addCustomer(CustomerDto customer);
 
     void deleteCustomer(CustomerDto customer);
-
 }

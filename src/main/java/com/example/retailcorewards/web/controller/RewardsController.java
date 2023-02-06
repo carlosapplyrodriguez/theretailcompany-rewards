@@ -16,11 +16,13 @@ import java.util.Map;
 @RequestMapping("/api/v1/rewards")
 public class RewardsController {
 
-    @Autowired
     private OrderService orderService;
-
-    @Autowired
     private RewardsService rewardsService;
+
+    public RewardsController(OrderService orderService, RewardsService rewardsService) {
+        this.orderService = orderService;
+        this.rewardsService = rewardsService;
+    }
 
     @GetMapping
     public Map<String, Map<String, Integer>> getRewardPoints() throws Exception {
