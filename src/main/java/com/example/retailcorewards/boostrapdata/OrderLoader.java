@@ -3,12 +3,14 @@ package com.example.retailcorewards.boostrapdata;
 import com.example.retailcorewards.repositories.OrderRepository;
 import com.example.retailcorewards.web.model.CustomerDto;
 import com.example.retailcorewards.web.model.OrderDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Slf4j
 @Component
 public class OrderLoader implements CommandLineRunner {
 
@@ -117,7 +119,6 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-
             // Delita orders
 
             orderRepository.save(OrderDto.builder()
@@ -175,7 +176,6 @@ public class OrderLoader implements CommandLineRunner {
                     .total(new BigDecimal("170"))
                     .customer(delita)
                     .build());
-
 
             // Mustadio orders
 
@@ -235,7 +235,6 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-
             // Agrias orders
 
             orderRepository.save(OrderDto.builder()
@@ -294,9 +293,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            System.out.println("Data boostrapping completed. " + orderRepository.count() + " orders were loaded.");
-
+            log.info("Data boostrapping completed. " + orderRepository.count() + " orders were loaded.");
         }
     }
-
 }

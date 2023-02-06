@@ -3,10 +3,11 @@ package com.example.retailcorewards.boostrapdata;
 import com.example.retailcorewards.repositories.CustomerRepository;
 import com.example.retailcorewards.repositories.OrderRepository;
 import com.example.retailcorewards.web.model.CustomerDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class CustomerLoader implements CommandLineRunner {
 
@@ -113,9 +114,7 @@ public class CustomerLoader implements CommandLineRunner {
                     .email("dycedarg.beoulve@fftexample.com")
                     .build());
 
-
-            System.out.println("Data boostrapping completed. " + customerRepository.count() + " customers were loaded.");
+            log.info("Data boostrapping completed. " + customerRepository.count() + " customers were loaded.");
         }
     }
-
 }

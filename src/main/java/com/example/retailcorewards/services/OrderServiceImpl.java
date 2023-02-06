@@ -2,8 +2,6 @@ package com.example.retailcorewards.services;
 
 import com.example.retailcorewards.repositories.OrderRepository;
 import com.example.retailcorewards.web.model.OrderDto;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

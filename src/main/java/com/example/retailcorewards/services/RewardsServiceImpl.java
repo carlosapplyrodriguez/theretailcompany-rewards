@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A service to calculate reward points through processing of orders.
+ * A service to calculate reward points through order processing.
  */
 @Service
 public class RewardsServiceImpl implements RewardsService {
@@ -17,7 +17,6 @@ public class RewardsServiceImpl implements RewardsService {
     private static final int upperRewardsThreshold = 100;
     private static final int rewardPointsForLowerThreshold = 1;
     private static final int rewardPointsForUpperThreshold = 2;
-
 
     /**
      * A method to process a list of OrderDto objects to summarize the total of reward points a customer accrued by month based in purchase amounts.
@@ -49,8 +48,7 @@ public class RewardsServiceImpl implements RewardsService {
                     if (result.containsKey(customerFullName)) {
                         Map<String, Integer> map = result.get(customerFullName);
                         if (map.containsKey(monthOfOrder)) {
-                            map.replace(monthOfOrder,
-                                    map.get(monthOfOrder) + calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold));
+                            map.replace(monthOfOrder, map.get(monthOfOrder) + calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold));
                         } else {
                             map.put(monthOfOrder, calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold));
                         }
@@ -65,8 +63,7 @@ public class RewardsServiceImpl implements RewardsService {
                     if (result.containsKey(customerFullName)) {
                         Map<String, Integer> map = result.get(customerFullName);
                         if (map.containsKey(monthOfOrder)) {
-                            map.replace(monthOfOrder,
-                                    map.get(monthOfOrder) + calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold));
+                            map.replace(monthOfOrder, map.get(monthOfOrder) + calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold));
                         } else {
                             map.put(monthOfOrder, calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold));
                         }
