@@ -4,6 +4,7 @@ import com.example.retailcorewards.web.model.CustomerDto;
 import com.example.retailcorewards.web.model.OrderDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
@@ -22,6 +23,7 @@ class OrderRepositoryTest {
             .lastName("Beoulve")
             .email("ramza.beoulve@fftexample.com")
             .build();
+
     OrderDto mockOrder = OrderDto.builder()
             .id("order1")
             .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
@@ -30,14 +32,10 @@ class OrderRepositoryTest {
             .customer(ramza)
             .build();
 
-
-    private final OrderRepository underTest;
-    private final CustomerRepository customerRepository;
-
-    public OrderRepositoryTest(OrderRepository underTest, CustomerRepository customerRepository) {
-        this.underTest = underTest;
-        this.customerRepository = customerRepository;
-    }
+    @Autowired
+    private OrderRepository underTest;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @AfterEach
     void tearDown() {
