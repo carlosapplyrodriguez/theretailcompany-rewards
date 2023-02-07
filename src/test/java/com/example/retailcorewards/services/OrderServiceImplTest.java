@@ -19,18 +19,12 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
 
-    @Mock
-    private OrderRepository orderRepository;
-
-    private OrderServiceImpl underTest;
-
     CustomerDto delita = CustomerDto.builder()
             .id("Delral")
             .firstName("Delita")
             .lastName("Heiral")
             .email("delita.heiral@fftexample.com")
             .build();
-
     OrderDto order = OrderDto.builder()
             .id("order1")
             .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
@@ -38,6 +32,9 @@ class OrderServiceImplTest {
             .total(new BigDecimal("70"))
             .customer(delita)
             .build();
+    @Mock
+    private OrderRepository orderRepository;
+    private OrderServiceImpl underTest;
 
     @BeforeEach
     void setUp() {

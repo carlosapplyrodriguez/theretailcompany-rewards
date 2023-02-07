@@ -2,7 +2,10 @@ package com.example.retailcorewards.web.controller;
 
 import com.example.retailcorewards.services.OrderService;
 import com.example.retailcorewards.web.model.OrderDto;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -17,7 +20,6 @@ public class OrderController {
     }
 
     /**
-     *
      * @return
      */
     @RequestMapping
@@ -26,7 +28,6 @@ public class OrderController {
     }
 
     /**
-     *
      * @param orderDto
      */
     @PostMapping

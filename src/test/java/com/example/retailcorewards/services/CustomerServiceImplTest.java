@@ -15,17 +15,15 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceImplTest {
 
-    @Mock
-    private CustomerRepository customerRepository;
-
-    private CustomerServiceImpl underTest;
-
     CustomerDto ramza = CustomerDto.builder()
             .id("Ramlve")
             .firstName("Ramza")
             .lastName("Beoulve")
             .email("ramza.beoulve@fftexample.com")
             .build();
+    @Mock
+    private CustomerRepository customerRepository;
+    private CustomerServiceImpl underTest;
 
     @BeforeEach
     void setUp() {

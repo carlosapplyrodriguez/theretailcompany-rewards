@@ -3,8 +3,6 @@ package com.example.retailcorewards.web.controller;
 import com.example.retailcorewards.services.OrderService;
 import com.example.retailcorewards.services.RewardsService;
 import com.example.retailcorewards.web.model.OrderDto;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +14,8 @@ import java.util.Map;
 @RequestMapping("/api/v1/rewards")
 public class RewardsController {
 
-    private OrderService orderService;
-    private RewardsService rewardsService;
+    private final OrderService orderService;
+    private final RewardsService rewardsService;
 
     public RewardsController(OrderService orderService, RewardsService rewardsService) {
         this.orderService = orderService;

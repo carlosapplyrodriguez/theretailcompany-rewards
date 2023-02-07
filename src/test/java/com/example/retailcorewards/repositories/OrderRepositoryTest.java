@@ -17,17 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @DataJpaTest
 class OrderRepositoryTest {
 
-    @Autowired
-    private OrderRepository underTest;
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @AfterEach
-    void tearDown() {
-        customerRepository.deleteAll();
-        underTest.deleteAll();
-    }
-
     CustomerDto ramza = CustomerDto.builder()
             .id("ramlve")
             .firstName("Ramza")
@@ -42,6 +31,17 @@ class OrderRepositoryTest {
             .total(new BigDecimal("70"))
             .customer(ramza)
             .build();
+
+    @Autowired
+    private OrderRepository underTest;
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @AfterEach
+    void tearDown() {
+        customerRepository.deleteAll();
+        underTest.deleteAll();
+    }
 
     @Test
     void shouldCheckIfIsReturningOrders() {

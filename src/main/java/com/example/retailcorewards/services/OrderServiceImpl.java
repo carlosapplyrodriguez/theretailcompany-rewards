@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * A service in charge of performing basic operations in Order objects.
- *
+ * <p>
  * Supports: Getting all orders, adding an order (requires passing the order to add.), deleting an order (requires the order to delete).
  */
 @Service
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * Method to add a new order
      *
-     * @param orderDto  Object representing the order to add.
+     * @param orderDto Object representing the order to add.
      */
     @Override
     public void addOrder(OrderDto orderDto) {
@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
     /**
      * Method to delete a specific order.
      *
-     * @param orderDto  Object representing the Order to delete.
+     * @param orderDto Object representing the Order to delete.
      */
     @Override
     public void deleteOrder(OrderDto orderDto) {

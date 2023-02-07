@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface OrderRepository extends CrudRepository<OrderDto, String> {
-    public List<OrderDto> findAll();
+    List<OrderDto> findAll();
 }
