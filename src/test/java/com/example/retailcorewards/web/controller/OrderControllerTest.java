@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -48,12 +47,12 @@ class OrderControllerTest {
         // when
         when(orderService.getAllOrders())
                 .thenReturn(List.of(OrderDto.builder()
-                    .id("order1")
-                    .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
-                    .creationDate(LocalDate.of(2022, 12, 22))
-                    .total(new BigDecimal("70"))
-                    .customer(ramza)
-                    .build()
+                        .id("order1")
+                        .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
+                        .creationDate(LocalDate.of(2022, 12, 22))
+                        .total(new BigDecimal("70"))
+                        .customer(ramza)
+                        .build()
                 ));
 
         this.mockMvc

@@ -4,7 +4,6 @@ import com.example.retailcorewards.web.model.CustomerDto;
 import com.example.retailcorewards.web.model.OrderDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.math.BigDecimal;
@@ -17,24 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @DataJpaTest
 class OrderRepositoryTest {
 
-    @Autowired
-    private OrderRepository underTest;
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @AfterEach
-    void tearDown() {
-        customerRepository.deleteAll();
-        underTest.deleteAll();
-    }
-
     CustomerDto ramza = CustomerDto.builder()
             .id("ramlve")
             .firstName("Ramza")
             .lastName("Beoulve")
             .email("ramza.beoulve@fftexample.com")
             .build();
-
     OrderDto mockOrder = OrderDto.builder()
             .id("order1")
             .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
@@ -42,6 +29,21 @@ class OrderRepositoryTest {
             .total(new BigDecimal("70"))
             .customer(ramza)
             .build();
+
+
+    private final OrderRepository underTest;
+    private final CustomerRepository customerRepository;
+
+    public OrderRepositoryTest(OrderRepository underTest, CustomerRepository customerRepository) {
+        this.underTest = underTest;
+        this.customerRepository = customerRepository;
+    }
+
+    @AfterEach
+    void tearDown() {
+        customerRepository.deleteAll();
+        underTest.deleteAll();
+    }
 
     @Test
     void shouldCheckIfIsReturningOrders() {

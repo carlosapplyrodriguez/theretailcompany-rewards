@@ -14,39 +14,35 @@ import java.time.LocalDate;
 @Component
 public class OrderLoader implements CommandLineRunner {
 
-    private OrderRepository orderRepository;
-
-    public OrderLoader(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
-
-    private CustomerDto ramza = CustomerDto.builder()
+    private final OrderRepository orderRepository;
+    private final CustomerDto ramza = CustomerDto.builder()
             .id("ramlve")
             .firstName("Ramza")
             .lastName("Beoulve")
             .email("ramza.beoulve@fftexample.com")
             .build();
-
-    private CustomerDto delita = CustomerDto.builder()
+    private final CustomerDto delita = CustomerDto.builder()
             .id("delral")
             .firstName("Delita")
             .lastName("Heiral")
             .email("delita.heiral@fftexample.com")
             .build();
-
-    private CustomerDto mustadio = CustomerDto.builder()
+    private final CustomerDto mustadio = CustomerDto.builder()
             .id("musnsa")
             .firstName("Mustadio")
             .lastName("Bunansa")
             .email("mustadio.bunansa@fftexample.com")
             .build();
-
-    private CustomerDto agrias = CustomerDto.builder()
+    private final CustomerDto agrias = CustomerDto.builder()
             .id("agraks")
             .firstName("Agrias")
             .lastName("Oaks")
             .email("agrias.oaks@fftexample.com\n")
             .build();
+
+    public OrderLoader(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {

@@ -75,16 +75,17 @@ class RewardsControllerTest {
                         .customer(ramza)
                         .build()
                 );
-            }}))
-            .thenReturn(new HashMap<String, Map<String, Integer>>() {{
-                put("Ramza Beoulve", new HashMap<String, Integer>(){{
-                    put("DECEMBER", 20);
+            }
+        }))
+                .thenReturn(new HashMap<String, Map<String, Integer>>() {{
+                    put("Ramza Beoulve", new HashMap<String, Integer>() {{
+                        put("DECEMBER", 20);
+                    }});
                 }});
-            }});
 
         this.mockMvc
-            .perform(MockMvcRequestBuilders
-                .get("/api/v1/rewards"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)));
+                .perform(MockMvcRequestBuilders
+                        .get("/api/v1/rewards"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)));
     }
 }

@@ -35,23 +35,23 @@ class CustomerControllerTest {
     void checkIfReturnsListOfCustomers() throws Exception {
         // when
         when(customerService.getAllCustomers())
-            .thenReturn(List.of(CustomerDto.builder()
-                .id("Ramlve")
-                .firstName("Ramza")
-                .lastName("Beoulve")
-                .email("ramza.beoulve@fftexample.com")
-                .build()
-            ));
+                .thenReturn(List.of(CustomerDto.builder()
+                        .id("Ramlve")
+                        .firstName("Ramza")
+                        .lastName("Beoulve")
+                        .email("ramza.beoulve@fftexample.com")
+                        .build()
+                ));
 
         this.mockMvc
-            .perform(MockMvcRequestBuilders
-                .get("/api/v1/customers"))
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
-            .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is("Ramlve")))
-            .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName", Matchers.is("Ramza")))
-            .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName", Matchers.is("Beoulve")))
-            .andExpect(MockMvcResultMatchers.jsonPath("$[0].email", Matchers.is("ramza.beoulve@fftexample.com")));
+                .perform(MockMvcRequestBuilders
+                        .get("/api/v1/customers"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.size()", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is("Ramlve")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName", Matchers.is("Ramza")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].lastName", Matchers.is("Beoulve")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].email", Matchers.is("ramza.beoulve@fftexample.com")));
 
     }
 
@@ -59,11 +59,11 @@ class CustomerControllerTest {
     void shouldAddCustomer() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-            .post("/api/v1/customers")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("{\"id\": \"Ramlve\", \"firstName\": \"Ramza\", \"lastName\": \"Beoulve\", \"email\": \"ramza.beoulve@fftexample.com\"}")
+                .post("/api/v1/customers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\": \"Ramlve\", \"firstName\": \"Ramza\", \"lastName\": \"Beoulve\", \"email\": \"ramza.beoulve@fftexample.com\"}")
         )
-        .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
         verify(customerService).addCustomer(any(CustomerDto.class));
 
