@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,14 +14,14 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 @Entity
-public class CustomerDto {
+public class Customer {
 
     @Id
     private String id;
     private String firstName;
     private String lastName;
 
-    //@Column(unique = true)
+    @Column(unique = true)
     private String email;
 
 }

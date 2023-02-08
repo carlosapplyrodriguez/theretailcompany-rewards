@@ -62,22 +62,6 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- JAXB Dependencies -->
-
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>${jaxb.version}</version>
-		</dependency>
-
-		<!-- Apache Derby -->
-
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!-- H2 Database -->
 
 		<dependency>

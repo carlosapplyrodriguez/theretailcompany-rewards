@@ -1,7 +1,7 @@
 package com.example.retailcorewards.web.controller;
 
 import com.example.retailcorewards.services.CustomerService;
-import com.example.retailcorewards.web.model.CustomerDto;
+import com.example.retailcorewards.web.model.Customer;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ class CustomerControllerTest {
     void checkIfReturnsListOfCustomers() throws Exception {
         // when
         when(customerService.getAllCustomers())
-                .thenReturn(List.of(CustomerDto.builder()
+                .thenReturn(List.of(Customer.builder()
                         .id("Ramlve")
                         .firstName("Ramza")
                         .lastName("Beoulve")
@@ -65,7 +65,7 @@ class CustomerControllerTest {
         )
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        verify(customerService).addCustomer(any(CustomerDto.class));
+        verify(customerService).addCustomer(any(Customer.class));
 
     }
 }

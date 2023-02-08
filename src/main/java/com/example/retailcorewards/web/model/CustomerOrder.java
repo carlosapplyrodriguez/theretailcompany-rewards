@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -16,15 +17,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-public class OrderDto {
+public class CustomerOrder {
 
-    String description;
-    //@Column(updatable = false)
-    LocalDate creationDate;
-    @ManyToOne
-    CustomerDto customer;
     @Id
     private String id;
+    String description;
+    @Column(updatable = false)
+    LocalDate creationDate;
+    @ManyToOne
+    Customer customer;
     private BigDecimal total;
 
 }

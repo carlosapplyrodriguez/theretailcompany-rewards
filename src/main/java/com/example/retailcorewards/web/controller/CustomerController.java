@@ -1,7 +1,7 @@
 package com.example.retailcorewards.web.controller;
 
 import com.example.retailcorewards.services.CustomerService;
-import com.example.retailcorewards.web.model.CustomerDto;
+import com.example.retailcorewards.web.model.Customer;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +17,12 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<CustomerDto> getCustomers() {
+    public List<Customer> getCustomers() {
         return customerService.getAllCustomers();
     }
 
     @PostMapping
-    public void addCustomer(@RequestBody CustomerDto customer) {
+    public void addCustomer(@RequestBody Customer customer) {
         customerService.addCustomer(customer);
     }
 

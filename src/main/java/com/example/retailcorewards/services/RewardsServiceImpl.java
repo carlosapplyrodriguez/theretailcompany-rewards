@@ -1,6 +1,6 @@
 package com.example.retailcorewards.services;
 
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class RewardsServiceImpl implements RewardsService {
      * @throws Exception Exception is thrown when the rewards thresholds have negative values.
      */
     @Override
-    public Map<String, Map<String, Integer>> getRewardPoints(List<OrderDto> orders) throws Exception {
+    public Map<String, Map<String, Integer>> getRewardPoints(List<CustomerOrder> orders) throws Exception {
 
         int orderTotal;
         String customerFullName;
@@ -39,7 +39,7 @@ public class RewardsServiceImpl implements RewardsService {
         Map<String, Map<String, Integer>> result = new HashMap<>();
 
         if (null != orders && !orders.isEmpty()) {
-            for (OrderDto order : orders) {
+            for (CustomerOrder order : orders) {
                 orderTotal = order.getTotal().intValue();
                 customerFullName = order.getCustomer().getFirstName() + " " + order.getCustomer().getLastName();
                 monthOfOrder = order.getCreationDate().getMonth().toString();

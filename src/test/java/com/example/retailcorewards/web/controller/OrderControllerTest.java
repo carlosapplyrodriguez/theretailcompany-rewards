@@ -1,8 +1,8 @@
 package com.example.retailcorewards.web.controller;
 
 import com.example.retailcorewards.services.OrderService;
-import com.example.retailcorewards.web.model.CustomerDto;
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.Customer;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ class OrderControllerTest {
     @Test
     void checkItReturnsListListOfOrders() throws Exception {
         // given
-        CustomerDto ramza = CustomerDto.builder()
+        Customer ramza = Customer.builder()
                 .id("ramlve")
                 .firstName("Ramza")
                 .lastName("Beoulve")
@@ -46,7 +46,7 @@ class OrderControllerTest {
 
         // when
         when(orderService.getAllOrders())
-                .thenReturn(List.of(OrderDto.builder()
+                .thenReturn(List.of(CustomerOrder.builder()
                         .id("order1")
                         .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
                         .creationDate(LocalDate.of(2022, 12, 22))
@@ -76,7 +76,7 @@ class OrderControllerTest {
         )
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        verify(orderService).addOrder(any(OrderDto.class));
+        verify(orderService).addOrder(any(CustomerOrder.class));
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.retailcorewards.services;
 
 import com.example.retailcorewards.repositories.CustomerRepository;
-import com.example.retailcorewards.web.model.CustomerDto;
+import com.example.retailcorewards.web.model.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class CustomerServiceImplTest {
 
-    CustomerDto ramza = CustomerDto.builder()
+    Customer ramza = Customer.builder()
             .id("Ramlve")
             .firstName("Ramza")
             .lastName("Beoulve")
@@ -48,11 +48,11 @@ class CustomerServiceImplTest {
 
         // then
 
-        ArgumentCaptor<CustomerDto> customerDtoArgumentCaptor = ArgumentCaptor.forClass(CustomerDto.class);
+        ArgumentCaptor<Customer> customerDtoArgumentCaptor = ArgumentCaptor.forClass(Customer.class);
 
         verify(customerRepository).save(customerDtoArgumentCaptor.capture());
 
-        CustomerDto capturedCustomer = customerDtoArgumentCaptor.getValue();
+        Customer capturedCustomer = customerDtoArgumentCaptor.getValue();
 
         assertThat(capturedCustomer).isEqualTo(ramza);
 
@@ -65,13 +65,13 @@ class CustomerServiceImplTest {
         underTest.deleteCustomer(ramza);
 
         // then
-        ArgumentCaptor<CustomerDto> customerDtoArgumentCaptor = ArgumentCaptor.forClass(CustomerDto.class);
+        ArgumentCaptor<Customer> customerDtoArgumentCaptor = ArgumentCaptor.forClass(Customer.class);
 
         verify(customerRepository).delete(customerDtoArgumentCaptor.capture());
 
-        CustomerDto capturedCustomerDtoToDelete = customerDtoArgumentCaptor.getValue();
+        Customer capturedCustomerToDelete = customerDtoArgumentCaptor.getValue();
 
-        assertThat(capturedCustomerDtoToDelete).isEqualTo(ramza);
+        assertThat(capturedCustomerToDelete).isEqualTo(ramza);
 
     }
 }

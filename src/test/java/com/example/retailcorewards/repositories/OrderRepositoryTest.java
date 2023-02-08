@@ -1,7 +1,7 @@
 package com.example.retailcorewards.repositories;
 
-import com.example.retailcorewards.web.model.CustomerDto;
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.Customer;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @DataJpaTest
 class OrderRepositoryTest {
 
-    CustomerDto ramza = CustomerDto.builder()
+    Customer ramza = Customer.builder()
             .id("ramlve")
             .firstName("Ramza")
             .lastName("Beoulve")
             .email("ramza.beoulve@fftexample.com")
             .build();
 
-    OrderDto mockOrder = OrderDto.builder()
+    CustomerOrder mockOrder = CustomerOrder.builder()
             .id("order1")
             .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
             .creationDate(LocalDate.of(2022, 12, 24))
@@ -51,14 +51,14 @@ class OrderRepositoryTest {
         underTest.save(mockOrder);
 
         //when
-        List<OrderDto> returnedList = underTest.findAll();
+        List<CustomerOrder> returnedList = underTest.findAll();
 
         //then
         assertThat(returnedList).isNotNull();
         assertFalse(returnedList.isEmpty());
 
-        OrderDto returnedOrder = returnedList.get(0);
-        CustomerDto returnedCustomer = returnedOrder.getCustomer();
+        CustomerOrder returnedOrder = returnedList.get(0);
+        Customer returnedCustomer = returnedOrder.getCustomer();
 
         assertThat(returnedCustomer).isEqualTo(ramza);
         assertThat(returnedOrder).isEqualTo(mockOrder);
@@ -68,7 +68,7 @@ class OrderRepositoryTest {
     void shouldCheckThatNoOrdersAreReturnedWhenNoOrdersArePresent() {
 
         //when
-        List<OrderDto> returnedList = underTest.findAll();
+        List<CustomerOrder> returnedList = underTest.findAll();
 
         //then
         assertThat(returnedList).isNotNull();

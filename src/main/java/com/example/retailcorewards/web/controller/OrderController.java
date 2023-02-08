@@ -1,7 +1,7 @@
 package com.example.retailcorewards.web.controller;
 
 import com.example.retailcorewards.services.OrderService;
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,16 +23,16 @@ public class OrderController {
      * @return
      */
     @RequestMapping
-    public List<OrderDto> getOrders() {
+    public List<CustomerOrder> getOrders() {
         return orderService.getAllOrders();
     }
 
     /**
-     * @param orderDto
+     * @param customerOrder
      */
     @PostMapping
-    public void createNewOrder(@RequestBody OrderDto orderDto) {
-        orderService.addOrder(orderDto);
+    public void createNewOrder(@RequestBody CustomerOrder customerOrder) {
+        orderService.addOrder(customerOrder);
     }
 
 }
