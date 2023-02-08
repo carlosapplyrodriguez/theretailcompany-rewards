@@ -1,7 +1,7 @@
 package com.example.retailcorewards.services;
 
-import com.example.retailcorewards.web.model.CustomerDto;
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.Customer;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import junitparams.JUnitParamsRunner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,6 +22,17 @@ class RewardsServiceImplTest {
 
     private RewardsServiceImpl underTest;
 
+    @BeforeEach
+    void setUp() {
+        underTest = new RewardsServiceImpl();
+    }
+
+    @ParameterizedTest
+    @MethodSource("testLowerThresholdNumberValues")
+    public void testRewardPointsCalculationForPurchaseInLowerThreshold(int orderTotal, int lowerRewardsThreshold, int rewardPointsForLowerThreshold, int result) {
+        assertThat(underTest.calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold)).isEqualTo(result);
+    }
+
     private static Object[] testLowerThresholdNumberValues() {
         return new Object[]{
                 new Object[]{45, 50, 1, 0},
@@ -38,6 +49,12 @@ class RewardsServiceImplTest {
                 new Object[]{99, 50, 1, 49},
                 new Object[]{100, 50, 1, 50}
         };
+    }
+
+    @ParameterizedTest
+    @MethodSource("testUpperThresholdNumberValues")
+    public void testRewardPointsCalculationForPurchaseInUpperThreshold(int orderTotal, int lowerRewardsThreshold, int upperRewardsThreshold, int rewardPointsForUpperThreshold, int result) {
+        assertThat(underTest.calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold)).isEqualTo(result);
     }
 
     private static Object[] testUpperThresholdNumberValues() {
@@ -58,16 +75,22 @@ class RewardsServiceImplTest {
         };
     }
 
+    @ParameterizedTest
+    @MethodSource("testValues")
+    public void testGetRewardPoints(List<CustomerOrder> orders, Map<String, Map<String, Integer>> result) throws Exception {
+        assertThat(underTest.getRewardPoints(orders)).isEqualTo(result);
+    }
+
     private static Object[] testValues() {
 
-        CustomerDto ramza = CustomerDto.builder()
+        Customer ramza = Customer.builder()
                 .id("Ramlve")
                 .firstName("Ramza")
                 .lastName("Beoulve")
                 .email("ramza.beoulve@fftexample.com")
                 .build();
 
-        CustomerDto delita = CustomerDto.builder()
+        Customer delita = Customer.builder()
                 .id("Delral")
                 .firstName("Delita")
                 .lastName("Heiral")
@@ -80,11 +103,11 @@ class RewardsServiceImplTest {
 
         return new Object[]{
                 new Object[]{
-                        new ArrayList<OrderDto>() {{
+                        new ArrayList<CustomerOrder>() {{
 
                             // Ramza Orders
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order1")
                                     .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
                                     .creationDate(localDate1)
@@ -93,7 +116,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order2")
                                     .description("Sabre x 5, X Ether x 1, Key x 1, Cloud Sword x 1")
                                     .creationDate(localDate2)
@@ -102,7 +125,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order3")
                                     .description("Light Sword x 1, X-Potion x 1, Antidote x 1, Echo Herb x 1")
                                     .creationDate(localDate3)
@@ -111,7 +134,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order4")
                                     .description("Crystal Shield x 2, Soft x 1, holy  Grail x 1, Elixir x 1")
                                     .creationDate(localDate1)
@@ -120,7 +143,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order5")
                                     .description("Speed Boots x 1, Mithril Vest x 1, Lamp x 1, Atma Weapon x 1")
                                     .creationDate(localDate2)
@@ -129,7 +152,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order6")
                                     .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
                                     .creationDate(localDate3)
@@ -138,7 +161,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order7")
                                     .description("Judas Kiss x 1, Landmine tracker x 1, Morning Star x 1, Sunray Knife x 1")
                                     .creationDate(localDate1)
@@ -150,7 +173,7 @@ class RewardsServiceImplTest {
 
                             // Delita Orders
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order8")
                                     .description("Potion x 5, Ether x 1, Antidote x 1, Black Mail Armor x 1")
                                     .creationDate(localDate1)
@@ -159,7 +182,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order9")
                                     .description("Sabre x 5, X Ether x 1, Key x 1, Cloud Sword x 1")
                                     .creationDate(localDate2)
@@ -168,7 +191,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order10")
                                     .description("Light Sword x 1, X-Potion x 1, Antidote x 1, Echo Herb x 1")
                                     .creationDate(localDate3)
@@ -177,7 +200,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order11")
                                     .description("Crystal Shield x 2, Soft x 1, holy  Grail x 1, Elixir x 1")
                                     .creationDate(localDate1)
@@ -186,7 +209,7 @@ class RewardsServiceImplTest {
                                     .build()
                             );
 
-                            add(OrderDto.builder()
+                            add(CustomerOrder.builder()
                                     .id("order13")
                                     .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
                                     .creationDate(localDate2)
@@ -210,29 +233,6 @@ class RewardsServiceImplTest {
                         }}
                 }
         };
-    }
-
-    @BeforeEach
-    void setUp() {
-        underTest = new RewardsServiceImpl();
-    }
-
-    @ParameterizedTest
-    @MethodSource("testLowerThresholdNumberValues")
-    public void testRewardPointsCalculationForPurchaseInLowerThreshold(int orderTotal, int lowerRewardsThreshold, int rewardPointsForLowerThreshold, int result) {
-        assertThat(underTest.calculatePointsInLowerThreshold(orderTotal, lowerRewardsThreshold, rewardPointsForLowerThreshold)).isEqualTo(result);
-    }
-
-    @ParameterizedTest
-    @MethodSource("testUpperThresholdNumberValues")
-    public void testRewardPointsCalculationForPurchaseInUpperThreshold(int orderTotal, int lowerRewardsThreshold, int upperRewardsThreshold, int rewardPointsForUpperThreshold, int result) {
-        assertThat(underTest.calculatePointsInUpperThreshold(orderTotal, lowerRewardsThreshold, upperRewardsThreshold, rewardPointsForUpperThreshold)).isEqualTo(result);
-    }
-
-    @ParameterizedTest
-    @MethodSource("testValues")
-    public void testGetRewardPoints(List<OrderDto> orders, Map<String, Map<String, Integer>> result) throws Exception {
-        assertThat(underTest.getRewardPoints(orders)).isEqualTo(result);
     }
 
 }

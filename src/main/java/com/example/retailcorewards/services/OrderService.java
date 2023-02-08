@@ -1,6 +1,6 @@
 package com.example.retailcorewards.services;
 
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +8,10 @@ import java.util.List;
 @Service
 public interface OrderService {
 
-    List<OrderDto> getAllOrders();
+    List<CustomerOrder> getAllOrders();
 
-    void addOrder(OrderDto order);
+    void addOrder(CustomerOrder order);
 
-    void deleteOrder(OrderDto orderId);
+    void deleteOrder(CustomerOrder orderId);
 
 }

@@ -1,8 +1,8 @@
 package com.example.retailcorewards.services;
 
 import com.example.retailcorewards.repositories.OrderRepository;
-import com.example.retailcorewards.web.model.CustomerDto;
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.Customer;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,13 +19,13 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 class OrderServiceImplTest {
 
-    CustomerDto delita = CustomerDto.builder()
+    Customer delita = Customer.builder()
             .id("Delral")
             .firstName("Delita")
             .lastName("Heiral")
             .email("delita.heiral@fftexample.com")
             .build();
-    OrderDto order = OrderDto.builder()
+    CustomerOrder order = CustomerOrder.builder()
             .id("order1")
             .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
             .creationDate(LocalDate.of(2022, 12, 21))
@@ -56,13 +56,13 @@ class OrderServiceImplTest {
         underTest.addOrder(order);
 
         // then
-        ArgumentCaptor<OrderDto> orderDtoArgumentCaptor = ArgumentCaptor.forClass(OrderDto.class);
+        ArgumentCaptor<CustomerOrder> orderDtoArgumentCaptor = ArgumentCaptor.forClass(CustomerOrder.class);
 
         verify(orderRepository).save(orderDtoArgumentCaptor.capture());
 
-        OrderDto capturedOrderDto = orderDtoArgumentCaptor.getValue();
+        CustomerOrder capturedCustomerOrder = orderDtoArgumentCaptor.getValue();
 
-        assertThat(capturedOrderDto).isEqualTo(order);
+        assertThat(capturedCustomerOrder).isEqualTo(order);
     }
 
     @Test
@@ -71,11 +71,11 @@ class OrderServiceImplTest {
         underTest.deleteOrder(order);
 
         // then
-        ArgumentCaptor<OrderDto> orderDtoArgumentCaptor = ArgumentCaptor.forClass(OrderDto.class);
+        ArgumentCaptor<CustomerOrder> orderDtoArgumentCaptor = ArgumentCaptor.forClass(CustomerOrder.class);
 
         verify(orderRepository).delete(orderDtoArgumentCaptor.capture());
 
-        OrderDto capturedOrder = orderDtoArgumentCaptor.getValue();
+        CustomerOrder capturedOrder = orderDtoArgumentCaptor.getValue();
 
         assertThat(order).isEqualTo(capturedOrder);
     }

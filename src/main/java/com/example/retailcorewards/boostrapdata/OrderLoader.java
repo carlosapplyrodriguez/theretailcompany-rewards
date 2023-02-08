@@ -1,8 +1,8 @@
 package com.example.retailcorewards.boostrapdata;
 
 import com.example.retailcorewards.repositories.OrderRepository;
-import com.example.retailcorewards.web.model.CustomerDto;
-import com.example.retailcorewards.web.model.OrderDto;
+import com.example.retailcorewards.web.model.Customer;
+import com.example.retailcorewards.web.model.CustomerOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,25 +15,25 @@ import java.time.LocalDate;
 public class OrderLoader implements CommandLineRunner {
 
     private final OrderRepository orderRepository;
-    private final CustomerDto ramza = CustomerDto.builder()
+    private final Customer ramza = Customer.builder()
             .id("ramlve")
             .firstName("Ramza")
             .lastName("Beoulve")
             .email("ramza.beoulve@fftexample.com")
             .build();
-    private final CustomerDto delita = CustomerDto.builder()
+    private final Customer delita = Customer.builder()
             .id("delral")
             .firstName("Delita")
             .lastName("Heiral")
             .email("delita.heiral@fftexample.com")
             .build();
-    private final CustomerDto mustadio = CustomerDto.builder()
+    private final Customer mustadio = Customer.builder()
             .id("musnsa")
             .firstName("Mustadio")
             .lastName("Bunansa")
             .email("mustadio.bunansa@fftexample.com")
             .build();
-    private final CustomerDto agrias = CustomerDto.builder()
+    private final Customer agrias = Customer.builder()
             .id("agraks")
             .firstName("Agrias")
             .lastName("Oaks")
@@ -59,7 +59,7 @@ public class OrderLoader implements CommandLineRunner {
 
             // Ramza orders
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order1")
                     .description("Razor x 5, Brush x 1, Labrador x 1, Black Mail Armor x 1")
                     .creationDate(localDate1)
@@ -67,7 +67,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order2")
                     .description("Sabre x 5, X Ether x 1, Key x 1, Cloud Sword x 1")
                     .creationDate(localDate2)
@@ -75,7 +75,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order3")
                     .description("Light Sword x 1, X-Potion x 1, Antidote x 1, Echo Herb x 1")
                     .creationDate(localDate3)
@@ -83,7 +83,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order4")
                     .description("Crystal Shield x 2, Soft x 1, holy  Grail x 1, Elixir x 1")
                     .creationDate(localDate1)
@@ -91,7 +91,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order5")
                     .description("Speed Boots x 1, Mithril Vest x 1, Lamp x 1, Atma Weapon x 1")
                     .creationDate(localDate2)
@@ -99,7 +99,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order6")
                     .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
                     .creationDate(localDate3)
@@ -107,7 +107,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(ramza)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order7")
                     .description("Judas Kiss x 1, Landmine tracker x 1, Morning Star x 1, Sunray Knife x 1")
                     .creationDate(localDate1)
@@ -117,7 +117,7 @@ public class OrderLoader implements CommandLineRunner {
 
             // Delita orders
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order8")
                     .description("Potion x 5, Ether x 1, Antidote x 1, Black Mail Armor x 1")
                     .creationDate(localDate1)
@@ -125,7 +125,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(delita)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order9")
                     .description("Sabre x 5, X Ether x 1, Key x 1, Cloud Sword x 1")
                     .creationDate(localDate2)
@@ -133,7 +133,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(delita)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order10")
                     .description("Light Sword x 1, X-Potion x 1, Antidote x 1, Echo Herb x 1")
                     .creationDate(localDate3)
@@ -141,7 +141,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(delita)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order11")
                     .description("Crystal Shield x 2, Soft x 1, holy  Grail x 1, Elixir x 1")
                     .creationDate(localDate1)
@@ -149,7 +149,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(delita)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order12")
                     .description("Speed Boots x 1, Mithril Vest x 1, Lamp x 1, Atma Weapon x 1")
                     .creationDate(localDate2)
@@ -157,7 +157,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(delita)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order13")
                     .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
                     .creationDate(localDate3)
@@ -165,7 +165,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(delita)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order14")
                     .description("Judas Kiss x 1, Landmine tracker x 1, Morning Star x 1, Sunray Knife x 1")
                     .creationDate(localDate1)
@@ -175,7 +175,7 @@ public class OrderLoader implements CommandLineRunner {
 
             // Mustadio orders
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order15")
                     .description("Potion x 5, Ether x 1, Antidote x 1, Black Mail Armor x 1")
                     .creationDate(localDate1)
@@ -183,7 +183,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order16")
                     .description("Sabre x 5, X Ether x 1, Key x 1, Cloud Sword x 1")
                     .creationDate(localDate2)
@@ -191,7 +191,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order17")
                     .description("Light Sword x 1, X-Potion x 1, Antidote x 1, Echo Herb x 1")
                     .creationDate(localDate3)
@@ -199,7 +199,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order18")
                     .description("Crystal Shield x 2, Soft x 1, holy  Grail x 1, Elixir x 1")
                     .creationDate(localDate1)
@@ -207,7 +207,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order19")
                     .description("Speed Boots x 1, Mithril Vest x 1, Lamp x 1, Atma Weapon x 1")
                     .creationDate(localDate2)
@@ -215,7 +215,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order20")
                     .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
                     .creationDate(localDate3)
@@ -223,7 +223,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(mustadio)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order21")
                     .description("Judas Kiss x 1, Landmine tracker x 1, Morning Star x 1, Sunray Knife x 1")
                     .creationDate(localDate1)
@@ -233,7 +233,7 @@ public class OrderLoader implements CommandLineRunner {
 
             // Agrias orders
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order22")
                     .description("Potion x 5, Ether x 1, Antidote x 1, Black Mail Armor x 1")
                     .creationDate(localDate1)
@@ -241,7 +241,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order23")
                     .description("Sabre x 5, X Ether x 1, Key x 1, Cloud Sword x 1")
                     .creationDate(localDate2)
@@ -249,7 +249,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order24")
                     .description("Light Sword x 1, X-Potion x 1, Antidote x 1, Echo Herb x 1")
                     .creationDate(localDate3)
@@ -257,7 +257,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order25")
                     .description("Crystal Shield x 2, Soft x 1, holy  Grail x 1, Elixir x 1")
                     .creationDate(localDate1)
@@ -265,7 +265,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order26")
                     .description("Speed Boots x 1, Mithril Vest x 1, Lamp x 1, Atma Weapon x 1")
                     .creationDate(localDate2)
@@ -273,7 +273,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order27")
                     .description("Ifrit Stone x 5, Shuriken x 40, Shiva Stone x 1, Bahamut Stone x 1")
                     .creationDate(localDate3)
@@ -281,7 +281,7 @@ public class OrderLoader implements CommandLineRunner {
                     .customer(agrias)
                     .build());
 
-            orderRepository.save(OrderDto.builder()
+            orderRepository.save(CustomerOrder.builder()
                     .id("order28")
                     .description("Judas Kiss x 1, Landmine tracker x 1, Morning Star x 1, Sunray Knife x 1")
                     .creationDate(localDate1)

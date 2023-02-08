@@ -1,7 +1,7 @@
 package com.example.retailcorewards.services;
 
 import com.example.retailcorewards.repositories.CustomerRepository;
-import com.example.retailcorewards.web.model.CustomerDto;
+import com.example.retailcorewards.web.model.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @return A list of the persisted CustomerDto objects.
      */
     @Override
-    public List<CustomerDto> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
@@ -31,7 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
      * @param customer Object representing the customer to add.
      */
     @Override
-    public void addCustomer(CustomerDto customer) {
+    public void addCustomer(Customer customer) {
         customerRepository.save(customer);
     }
 
@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
      *
      * @param customer Object representing the Customer to delete.
      */
-    public void deleteCustomer(CustomerDto customer) {
+    public void deleteCustomer(Customer customer) {
         customerRepository.delete(customer);
     }
 }
